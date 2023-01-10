@@ -1,0 +1,7 @@
+.element {
+  font-family: 'Inter', Arial, sans-serif;
+  overflow: hidden;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+}

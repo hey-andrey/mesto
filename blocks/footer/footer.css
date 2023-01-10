@@ -1,0 +1,11 @@
+.footer {
+  padding: 31px 0 60px;
+  font-family: 'Inter', Arial, sans-serif;
+  flex-shrink: 0;
+}
+  
+@media screen and (max-width: 921px) {
+  .footer {
+    padding: 30px 0 36px;
+  }
+}

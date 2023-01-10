@@ -1,0 +1,16 @@
+.page__section {
+  margin: 0 auto;
+  width: 100%;
+  max-width: 882px;
+  position: relative;
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+}
+
+  
+@media screen and (max-width: 921px) {
+  .page__section {
+    width: calc(100% - 40px);
+  }
+}

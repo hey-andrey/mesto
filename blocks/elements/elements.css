@@ -1,0 +1,10 @@
+.elements {
+  padding: 11px 0 36px;
+  font-family: 'Inter', Arial, sans-serif;
+}
+  
+@media screen and (max-width: 921px) {
+  .elements {
+    padding: 15px 0 18px;
+  }
+}
