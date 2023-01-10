@@ -22,8 +22,8 @@
   bottom: 0;
 }
 
-  
-@media screen and (max-width: 921pxpx) {
+
+@media screen and (max-width: 921px) {
   .header {
     min-height: 85px;
   }
