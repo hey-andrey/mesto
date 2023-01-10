@@ -7,23 +7,17 @@ width: 35px;
 height: 35px;
 border: none;
 position: absolute;
-top: -36px;
-right: -34px;
+top: -42px;
+right: -42px;
 -webkit-transform: rotate(90deg);
 -ms-transform: rotate(90deg);
 -moz-transform: rotate(90deg);
 -o-transform: rotate(90deg);
 transform: rotate(90deg);
-transition: 0.3s ease-in-out;
+transition: visibility 0s, opacity 0.3s;
 cursor: pointer;
 }
-  
+
 .popup__close-button:hover {
   opacity: 0.6;
-}
-  
-@media screen and (max-width: 921px) {
-  .popup__close-button {
-    right: 0;
-  }
 }
