@@ -1,15 +1,20 @@
-// Открываю Pop-up с кнопки edit-button
+// Нахожу Pop-up
 const popup = document.querySelector('.popup');
+// Нахожу Pop-up с кнопкой открытия (edit-button)
 const profileEditButton = document.querySelector('.profile__edit-button');
-
-// Закрываю Pop-up с кнопки close-button
+// Нахожу Pop-up с кнопкой закрытия (close-button)
 const popupCloseButton = document.querySelector('.popup__close-button');
 
-// Слежу за событием/кликом на открытие и закрытие Pop-up
-profileEditButton.addEventListener('click', openPopup);
-popupCloseButton.addEventListener('click', openPopup);
+// Нахожу форму в DOM
+const popupForm = document.querySelector('.popup__form');
+// Нахожу DOM профиля
+const profileTitle = document.querySelector('.profile__title');
+const profileDescription = document.querySelector('.profile__description');
+// Нахожу поля формы в DOM
+const titleInputValue = popupForm.querySelector('.popup__input_type_title');
+const descriptionInputValue = popupForm.querySelector('.popup__input_type_description');
 
-function openPopup(evt) {
+function togglePopup(evt) {
   if (!popup.classList.contains('popup_opened')) {
     titleInputValue.value = profileTitle.textContent;
     descriptionInputValue.value = profileDescription.textContent;
@@ -17,24 +22,16 @@ function openPopup(evt) {
   popup.classList.toggle('popup_opened');
 }
 
-// Нахожу форму в DOM
-const popupForm = document.querySelector('.popup__form');
-
-// Нахожу поля формы в DOM
-const titleInputValue = popupForm.querySelector('.popup__input_type_title');
-const descriptionInputValue = popupForm.querySelector('.popup__input_type_description');
-
-// DOM профиля
-const profileTitle = document.querySelector('.profile__title');
-const profileDescription = document.querySelector('.profile__description');
-
-// Обработчик «отправки» формы
 function formSubmitHandler(evt) {
-    evt.preventDefault(); // Отменяю стандартную отправку формы
-    profileTitle.textContent = titleInputValue.value;
-    profileDescription.textContent = descriptionInputValue.value;
-    openPopup();
-  }
+  evt.preventDefault(); // Отменяю стандартную отправку формы
+  profileTitle.textContent = titleInputValue.value;
+  profileDescription.textContent = descriptionInputValue.value;
+  togglePopup();
+}
 
+// Слежу за событием/кликом на открытие Pop-up
+profileEditButton.addEventListener('click', togglePopup);
+// Слежу за событием/кликом на закрытие Pop-up
+popupCloseButton.addEventListener('click', togglePopup);
 // Слежу за событием/кликом на кнопку «отправки» формы
 popupForm.addEventListener('submit', formSubmitHandler);
