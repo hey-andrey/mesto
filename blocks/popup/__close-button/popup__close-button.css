@@ -21,3 +21,11 @@ cursor: pointer;
 .popup__close-button:hover {
   opacity: 0.6;
 }
+
+@media screen and (max-width: 921px) {
+  .popup__close-button {
+    background-size: 20px 20px;
+    top: -44px;
+    right: -8px;
+  }
+}
