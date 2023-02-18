@@ -8,7 +8,7 @@
   background: #000000;
   border-radius: 2px;
   border: none;
-  transition: visibility 0.3s, opacity 0.3s linear;
+  transition: visibility 0.5s, opacity 0.5s linear;
   font-size: 18px;
   line-height: 22px;
   color: #FFFFFF;

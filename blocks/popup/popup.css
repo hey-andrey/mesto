@@ -15,5 +15,5 @@
   opacity: 0;
   user-select: none;
   pointer-events: none;
-  transition: visibility 0.3s, opacity 0.3s linear;
+  transition: visibility 0.5s, opacity 0.5s linear;
 }
