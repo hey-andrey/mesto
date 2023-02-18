@@ -1,0 +1,14 @@
+.popup__container_contain_image {
+  padding: 0;
+  max-width: 75vw;
+  max-height: 75vh;
+  height: auto;
+  width: auto;
+  display: flex;
+  background: transparent;
+  background-size: cover;
+  -webkit-background-size: cover;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0;
+}

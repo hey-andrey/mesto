@@ -1,0 +1,4 @@
+.element__like-button_filled {
+  background: transparent url('../../../../images/filled-like.svg') no-repeat;
+  background-size: 21px 18px;
+}

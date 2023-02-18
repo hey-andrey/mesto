@@ -8,6 +8,10 @@
   border: none;
   cursor: pointer;
   transition: 0.3s ease-in-out;
+  -webkit-transition: 0.3s;
+  -moz-transition: 0.3s;
+  -ms-transition: 0.3s;
+  -o-transition: 0.3s;
 }
 
 .element__like-button:hover {
