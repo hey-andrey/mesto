@@ -1,29 +1,4 @@
-const initialCards = [
-  {
-    title: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-    title: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-    title: 'Домбай',
-    link: 'https://turvopros.com/wp-content/uploads/2018/12/dostoprimechatelnosti-dombaya.jpg'
-  },
-  {
-    title: 'Архыз',
-    link: 'https://www.tripzaza.com/ru/destinations/wp-content/uploads/2017/08/Arhyiz-e1502372601843.jpg'
-  },
-  {
-    title: 'Байкал',
-    link: 'https://thumb.tildacdn.com/tild6162-3235-4939-b765-333931613137/-/resize/824x/-/format/webp/shutterstock_1399371.jpg'
-  },
-  {
-    title: 'Камчатка',
-    link: 'https://www.rgo.ru/sites/default/files/styles/head_image_article/public/node/47522/00-aleksandr-kukrinov-saharnoe-utro-529605.jpg?itok=K53wHckX'
-  }
-];
+const ESC_KEYCODE = 27;
 
 // Темплейт
 const elementTemplate = document
@@ -60,8 +35,8 @@ const elementLinkInputValue = elementFormModalWindow.querySelector('.popup__inpu
 const getElementElements = (data) => {
   const elementElements = elementTemplate.cloneNode(true); // клонирую содержимое тега темплейт
 
-  const likeButton = elementElements.querySelector('.element__like-button');
   const deleteButton = elementElements.querySelector('.element__delete-button');
+  const likeButton = elementElements.querySelector('.element__like-button');
   const elementImage = elementElements.querySelector('.element__image');
 
   elementImage.style.backgroundImage = `url(${data.link})`;
@@ -78,9 +53,21 @@ const renderElement = (data, wrap) => {
   wrap.prepend(getElementElements(data));
 };
 
-// Метод toogle
-const toggleModalWindow = (modalWindow) => {
-  modalWindow.classList.toggle('popup_opened');
+const isEscEvent = (evt, action) => {
+  const activePopup = document.querySelector('.popup_opened');
+  if (evt.which === ESC_KEYCODE) {
+    action(activePopup);
+  }
+};
+
+const closeModalWindow = (modalWindow) => {
+  modalWindow.classList.remove('popup_opened');
+  document.removeEventListener('keyup', handleEscUp);
+};
+
+const openModalWindow = (modalWindow) => {
+  modalWindow.classList.add('popup_opened');
+  document.addEventListener('keyup', handleEscUp);
 };
 
 // Обработчики
@@ -88,7 +75,7 @@ const handleProfileFormSubmit = (evt) => {
   evt.preventDefault();
   profileTitle.textContent = titleInputValue.value;
   profileDescription.textContent = descriptionInputValue.value;
-  toggleModalWindow(editFormModalWindow);
+  closeModalWindow(editFormModalWindow);
 };
 
 const handleElementFormSubmit = (evt) => {
@@ -97,8 +84,17 @@ const handleElementFormSubmit = (evt) => {
     title: elementTitleInputValue.value,
     link: elementLinkInputValue.value
   }, elementsWrap);
-  toggleModalWindow(elementFormModalWindow);
-}
+  closeModalWindow(elementFormModalWindow);
+
+  evt.target.reset();
+};
+
+const handlePreviewPicture = (data) => {
+  popupImage.src = data.link;
+  popupImage.alt = `Изображение ${data.title}`;
+  popupCaption.textContent = data.title;
+  openModalWindow(imageModalWindow);
+};
 
 const handleLikeIcon = (evt) => { // если лайкнуть карточку, сердечко поменяет цвет
   evt.target.classList.toggle('element__like-button_filled');
@@ -108,27 +104,34 @@ const handleDeleteElement = (evt) => { // карточка удаляется п
   evt.target.closest('.element').remove(); // метод closest
 };
 
-const handlePreviewPicture = (data) => { // превью фотографий
-  popupImage.src = data.link;
-  popupImage.alt = `Изображение ${data.title}`;
-  popupCaption.textContent = data.title;
-  toggleModalWindow(imageModalWindow);
+const handleEscUp = (evt) => {
+  evt.preventDefault();
+  isEscEvent(evt, closeModalWindow);
 };
+
+// Слушатели на click
+openElementFormButton.addEventListener('click', () => {openModalWindow(elementFormModalWindow);
+}); // Клик на кнопку открытия попап добавления карточки
+
+openEditFormButton.addEventListener('click', () => {
+  titleInputValue.value = profileTitle.textContent; // Инпут title
+  descriptionInputValue.value = profileDescription.textContent; // Инпут description
+  openModalWindow(editFormModalWindow); // Клик на кнопку открытия попап редактирования профиля
+});
+
+elementFormModalWindow.addEventListener('click', (evt) => {
+  if (evt.target.classList.contains('popup') || evt.target.classList.contains('popup__close-button')) {closeModalWindow(elementFormModalWindow);}
+}); // // Клик на кнопку закрытия попап добавления карточки
+editFormModalWindow.addEventListener('click', (evt) => {
+  if (evt.target.classList.contains('popup') || evt.target.classList.contains('popup__close-button')) {closeModalWindow(editFormModalWindow);}
+}); // Клик на кнопку закрытия попап редактирования профиля
+imageModalWindow.addEventListener('click', (evt) => {
+  if (evt.target.classList.contains('popup') || evt.target.classList.contains('popup__close-button')) {closeModalWindow(imageModalWindow);}
+}); // Клик на кнопку закрытия попап изображения
 
 // Слушатели на submit
 editFormModalWindow.addEventListener('submit', handleProfileFormSubmit); // Сохранить редактирование профиля
 elementFormModalWindow.addEventListener('submit', handleElementFormSubmit); // Сохранить добавление карточки
-
-// Слушатели на click
-openEditFormButton.addEventListener('click', () => { // Клик на кнопку открытия формы для редактирования профиля
-  titleInputValue.value = profileTitle.textContent; // Поле title в форме редактирования профиля
-  descriptionInputValue.value = profileDescription.textContent; // Поле description в форме редактирования профиля
-  toggleModalWindow(editFormModalWindow);}); // Метод toogle
-closeEditFormButton.addEventListener('click', () => {toggleModalWindow(editFormModalWindow);}); // Клик на кнопку закрытия формы для редактирования профиля
-openElementFormButton.addEventListener('click', () => {toggleModalWindow(elementFormModalWindow);}); // Клик на кнопку открытия формы для добавления карточки
-  // как очистить форму после добавления
-closeElementFormButton.addEventListener('click', () => {toggleModalWindow(elementFormModalWindow);}); // Клик на кнопку закрытия формы для добавления карточки
-closeImageModalButton.addEventListener('click', () => {toggleModalWindow(imageModalWindow);}); // Клик на кнопку закрытия всплывающего окна с изображением
 
 initialCards.forEach((data) => {
   renderElement(data, elementsWrap)
