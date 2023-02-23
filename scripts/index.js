@@ -111,7 +111,7 @@ const handleEscUp = (evt) => {
 
 // Слушатели на click
 openElementFormButton.addEventListener('click', () => {openModalWindow(elementFormModalWindow);
-}); // Клик на кнопку открытия попап добавления карточки
+}); // Клик на открытие попап добавления карточки
 
 openEditFormButton.addEventListener('click', () => {
   titleInputValue.value = profileTitle.textContent; // Инпут title
@@ -121,13 +121,13 @@ openEditFormButton.addEventListener('click', () => {
 
 elementFormModalWindow.addEventListener('click', (evt) => {
   if (evt.target.classList.contains('popup') || evt.target.classList.contains('popup__close-button')) {closeModalWindow(elementFormModalWindow);}
-}); // // Клик на кнопку закрытия попап добавления карточки
+}); // // Клик для закрытия попап добавления карточки
 editFormModalWindow.addEventListener('click', (evt) => {
   if (evt.target.classList.contains('popup') || evt.target.classList.contains('popup__close-button')) {closeModalWindow(editFormModalWindow);}
-}); // Клик на кнопку закрытия попап редактирования профиля
+}); // Клик для закрытия попап редактирования профиля
 imageModalWindow.addEventListener('click', (evt) => {
   if (evt.target.classList.contains('popup') || evt.target.classList.contains('popup__close-button')) {closeModalWindow(imageModalWindow);}
-}); // Клик на кнопку закрытия попап изображения
+}); // Клик для закрытия попап изображения
 
 // Слушатели на submit
 editFormModalWindow.addEventListener('submit', handleProfileFormSubmit); // Сохранить редактирование профиля
