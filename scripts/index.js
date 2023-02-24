@@ -54,20 +54,20 @@ const renderElement = (data, wrap) => {
 };
 
 const isEscEvent = (evt, action) => {
-  const activePopup = document.querySelector('.popup_opened');
   if (evt.which === ESC_KEYCODE) {
+    const activePopup = document.querySelector('.popup_opened');
     action(activePopup);
   }
-};
-
-const closeModalWindow = (modalWindow) => {
-  modalWindow.classList.remove('popup_opened');
-  document.removeEventListener('keyup', handleEscUp);
 };
 
 const openModalWindow = (modalWindow) => {
   modalWindow.classList.add('popup_opened');
   document.addEventListener('keyup', handleEscUp);
+};
+
+const closeModalWindow = (modalWindow) => {
+  modalWindow.classList.remove('popup_opened');
+  document.removeEventListener('keyup', handleEscUp);
 };
 
 // Обработчики
@@ -119,15 +119,18 @@ openEditFormButton.addEventListener('click', () => {
   openModalWindow(editFormModalWindow); // Клик на кнопку открытия попап редактирования профиля
 });
 
-elementFormModalWindow.addEventListener('click', (evt) => {
-  if (evt.target.classList.contains('popup') || evt.target.classList.contains('popup__close-button')) {closeModalWindow(elementFormModalWindow);}
-}); // // Клик для закрытия попап добавления карточки
-editFormModalWindow.addEventListener('click', (evt) => {
-  if (evt.target.classList.contains('popup') || evt.target.classList.contains('popup__close-button')) {closeModalWindow(editFormModalWindow);}
-}); // Клик для закрытия попап редактирования профиля
-imageModalWindow.addEventListener('click', (evt) => {
-  if (evt.target.classList.contains('popup') || evt.target.classList.contains('popup__close-button')) {closeModalWindow(imageModalWindow);}
-}); // Клик для закрытия попап изображения
+// Находим все попапы в проекте и пробегаемся по ним, навешивая обработчик.
+const popups = document.querySelectorAll('.popup')
+popups.forEach((popup) => {
+    popup.addEventListener('mousedown', (evt) => {
+        if (evt.target.classList.contains('popup_opened')) {
+          closeModalWindow(popup)
+        }
+        if (evt.target.classList.contains('popup__close-button')) {
+          closeModalWindow(popup)
+        }
+    })
+})
 
 // Слушатели на submit
 editFormModalWindow.addEventListener('submit', handleProfileFormSubmit); // Сохранить редактирование профиля

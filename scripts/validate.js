@@ -58,6 +58,11 @@ const setEventListeners = (elementForm, {inputSelector, submitButtonSelector, in
   // Найдём в текущей форме кнопку отправки
   const buttonElement = elementForm.querySelector(submitButtonSelector);
 
+  elementForm.addEventListener('reset', () => { // собыите `reset` происходит когда вызывается `reset` у формы
+    setTimeout(() => {  // добавим таймаут, чтобы `toggleButtonState` вызвался уже после сохранения формы
+      toggleButtonState(listInput, buttonElement, inactiveButtonClass), 0 })
+  })
+
   // Обойдём все элементы полученной коллекции
   listInput.forEach((elementInput) => {
   // каждому полю добавим обработчик события input
@@ -75,7 +80,6 @@ const enableValidation = ({formSelector, ...rest}) => {
   getFormList.forEach((elementForm) => {
     elementForm.addEventListener('submit', (evt) => {
       evt.preventDefault();
-      submitButtonSelector.setAttribute('disabled', 'disabled');
     });
     // Для каждой формы вызовем функцию setEventListeners,
     // передав ей элемент формы
