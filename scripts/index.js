@@ -1,6 +1,34 @@
 import Card from './Card.js';
 import FormValidator from './FormValidator.js';
-import { initialCards, openModalWindow, closeModalWindow } from './utility.js';
+
+import { openModalWindow, closeModalWindow } from './utility.js';
+
+const initialCards = [
+  {
+    title: 'Холмогорский район',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
+  },
+  {
+    title: 'Челябинская область',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
+  },
+  {
+    title: 'Домбай',
+    link: 'https://turvopros.com/wp-content/uploads/2018/12/dostoprimechatelnosti-dombaya.jpg'
+  },
+  {
+    title: 'Архыз',
+    link: 'https://www.tripzaza.com/ru/destinations/wp-content/uploads/2017/08/Arhyiz-e1502372601843.jpg'
+  },
+  {
+    title: 'Байкал',
+    link: 'https://thumb.tildacdn.com/tild6162-3235-4939-b765-333931613137/-/resize/824x/-/format/webp/shutterstock_1399371.jpg'
+  },
+  {
+    title: 'Камчатка',
+    link: 'https://www.rgo.ru/sites/default/files/styles/head_image_article/public/node/47522/00-aleksandr-kukrinov-saharnoe-utro-529605.jpg?itok=K53wHckX'
+  }
+];
 
 // Вставки
 const elementsWrap = document.querySelector('.elements__list'); // нахожу elements__list с помощью .querySelector
@@ -22,7 +50,7 @@ const descriptionInputValue = editFormModalWindow.querySelector('.popup__input_t
 const elementTitleInputValue = elementFormModalWindow.querySelector('.popup__input_type_element-title');
 const elementLinkInputValue = elementFormModalWindow.querySelector('.popup__input_type_url');
 
-const elementSelector = '.element-template';
+const elementSelector = ('#element-template');
 const validationConfig = {
   formSelector: '.popup__form',
   inputSelector: '.popup__input',
@@ -45,7 +73,7 @@ const createElement = (data) => {
 
 const renderElement = (data, wrap) => {
   const element = createElement(data);
-  wrap.prepend(element.getView());
+  wrap.prepend(element);
 };
 
 // Обработчики
