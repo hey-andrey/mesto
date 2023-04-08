@@ -66,15 +66,8 @@ const elementFormValidator = new FormValidator(validationConfig, elementFormModa
 editFormValidator.enableValidation();
 elementFormValidator.enableValidation();
 
-const createElement = (data) => {
-  const element = new Card(data, elementSelector);
-  return element.getView();
-}
-
-const renderElement = (data, wrap) => {
-  const element = createElement(data);
-  wrap.prepend(element);
-};
+editFormValidator.resetValidation();
+elementFormValidator.resetValidation();
 
 // Обработчики
 const handleProfileFormSubmit = (evt) => {
@@ -92,16 +85,38 @@ const handleElementFormSubmit = (evt) => {
   }, elementsWrap);
   closeModalWindow(elementFormModalWindow);
 
-  evt.target.reset();
+  elementTitleInputValue.value = '';
+  elementLinkInputValue.value = '';
+};
+
+const createElement = (data) => {
+  const element = new Card(data, elementSelector);
+  return element.getView();
+}
+
+const renderElement = (data, wrap) => {
+  const element = createElement(data);
+  wrap.prepend(element);
 };
 
 // Слушатели
-openElementFormButton.addEventListener('click', () => {openModalWindow(elementFormModalWindow);}); // Клик на открытие попап добавления карточки
+openElementFormButton.addEventListener('click', () => {openModalWindow(elementFormModalWindow);
+  elementTitleInputValue.value = '';
+  elementLinkInputValue.value = '';
+
+  elementFormValidator.resetValidation();
+
+}); // Клик на открытие попап добавления карточки
+
+
 
 openEditFormButton.addEventListener('click', () => {
   titleInputValue.value = profileTitle.textContent; // Инпут title
   descriptionInputValue.value = profileDescription.textContent; // Инпут description
   openModalWindow(editFormModalWindow); // Клик на кнопку открытия попап редактирования профиля
+
+  editFormValidator.resetValidation();
+
 });
 
 // Находим все попапы в проекте и пробегаемся по ним, навешивая обработчик.

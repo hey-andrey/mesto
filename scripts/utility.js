@@ -11,6 +11,7 @@ export const openModalWindow = (modalWindow) => {
 export const closeModalWindow = (modalWindow) => {
   modalWindow.classList.remove('popup_opened');
   document.removeEventListener('keyup', handleEscUp);
+
 };
 
 export const isEscEvent = (evt, action) => {
