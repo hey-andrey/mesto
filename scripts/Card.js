@@ -6,14 +6,6 @@ class Card {
     this._link = data.link;
 
     this._elementSelector = elementSelector;
-
-    this._element = this._getTemplate();
-
-    this._element.querySelector('.element__title').textContent = this._title;
-    this._element.querySelector('.element__image').style.backgroundImage = `url(${this._link})`;
-    this._likeButton = this._element.querySelector('.element__like-button');
-
-    this._setEventListeners();
   }
 
   // Темплейт
@@ -54,6 +46,14 @@ class Card {
   }
 
   getView() {
+    this._element = this._getTemplate();
+
+    this._element.querySelector('.element__title').textContent = this._title;
+    this._element.querySelector('.element__image').style.backgroundImage = `url(${this._link})`;
+    this._likeButton = this._element.querySelector('.element__like-button');
+
+    this._setEventListeners();
+
     return this._element;
   }
 }
