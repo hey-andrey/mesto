@@ -6,6 +6,14 @@ class Card {
     this._link = data.link;
 
     this._elementSelector = elementSelector;
+
+    this._element = this._getTemplate();
+
+    this._element.querySelector('.element__title').textContent = this._title;
+    this._element.querySelector('.element__image').style.backgroundImage = `url(${this._link})`;
+    this._likeButton = this._element.querySelector('.element__like-button');
+
+    this._setEventListeners();
   }
 
   // Темплейт
@@ -23,10 +31,8 @@ class Card {
     this._element.querySelector('.element__image')
       .addEventListener('click', () => this._handlePreviewPicture());
 
-      this._element.querySelector('.element__like-button')
-      .addEventListener('click', () => this._handleLikeIcon());
-
-    this._element.querySelector('.element__delete-button')
+      this._likeButton.addEventListener('click', () => this._handleLikeIcon());
+      this._element.querySelector('.element__delete-button')
       .addEventListener('click', () => this._handleDeleteElement());
   }
 
@@ -38,7 +44,7 @@ class Card {
   }
 
   _handleLikeIcon() {
-    this._element.querySelector('.element__like-button').classList.toggle('element__like-button_filled');
+    this._likeButton.classList.toggle('element__like-button_filled');
   }
 
   _handleDeleteElement() {
@@ -48,12 +54,6 @@ class Card {
   }
 
   getView() {
-    this._element = this._getTemplate();
-    this._setEventListeners();
-
-    this._element.querySelector('.element__title').textContent = this._title;
-    this._element.querySelector('.element__image').style.backgroundImage = `url(${this._link})`;
-
     return this._element;
   }
 }

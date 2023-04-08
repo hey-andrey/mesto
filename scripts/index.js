@@ -100,15 +100,9 @@ const renderElement = (data, wrap) => {
 };
 
 // Слушатели
-openElementFormButton.addEventListener('click', () => {openModalWindow(elementFormModalWindow);
-  elementTitleInputValue.value = '';
-  elementLinkInputValue.value = '';
-
-  elementFormValidator.resetValidation();
-
-}); // Клик на открытие попап добавления карточки
-
-
+// Слушатели на submit
+editFormModalWindow.addEventListener('submit', handleProfileFormSubmit); // Сохранить редактирование профиля
+elementFormModalWindow.addEventListener('submit', handleElementFormSubmit); // Сохранить добавление карточки
 
 openEditFormButton.addEventListener('click', () => {
   titleInputValue.value = profileTitle.textContent; // Инпут title
@@ -116,7 +110,13 @@ openEditFormButton.addEventListener('click', () => {
   openModalWindow(editFormModalWindow); // Клик на кнопку открытия попап редактирования профиля
 
   editFormValidator.resetValidation();
+});
 
+openElementFormButton.addEventListener('click', () => {openModalWindow(elementFormModalWindow);
+  elementTitleInputValue.value = '';
+  elementLinkInputValue.value = '';
+
+  elementFormValidator.resetValidation();
 });
 
 // Находим все попапы в проекте и пробегаемся по ним, навешивая обработчик.
@@ -131,10 +131,6 @@ popups.forEach((popup) => {
         }
     })
 })
-
-// Слушатели на submit
-editFormModalWindow.addEventListener('submit', handleProfileFormSubmit); // Сохранить редактирование профиля
-elementFormModalWindow.addEventListener('submit', handleElementFormSubmit); // Сохранить добавление карточки
 
 initialCards.forEach((data) => {
   renderElement(data, elementsWrap)
