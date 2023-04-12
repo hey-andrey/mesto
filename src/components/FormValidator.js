@@ -1,13 +1,13 @@
 class FormValidator {
-  constructor(config, popupElement) {
-    this._inputSelector = config.inputSelector;
-    this._submitButtonSelector = config.submitButtonSelector;
-    this._inactiveButtonClass = config.inactiveButtonClass;
-    this._inputErrorClass = config.inputErrorClass;
-    this._errorClass = config.errorClass;
+    constructor({ inputSelector, submitButtonSelector, inactiveButtonClass, inputErrorClass, errorClass }, popupSelector) {
+      this._inputSelector = inputSelector;
+      this._submitButtonSelector = submitButtonSelector;
+      this._inactiveButtonClass = inactiveButtonClass;
+      this._inputErrorClass = inputErrorClass;
+      this._errorClass = errorClass;
 
-    this._element = popupElement;
-  }
+      this._element = document.querySelector(popupSelector);
+    }
 
   // Функция, которая проверяет валидность поля
   _checkFieldValidity (elementInput) {
@@ -31,9 +31,9 @@ class FormValidator {
   _hideFieldError (elementInput) {
     const errorElement = this._element.querySelector(`#${elementInput.id}-error`);
     elementInput.classList.remove(this._inputErrorClass);
-    errorElement.classList.remove(this._errorClass);
     // Очистим ошибку
     errorElement.textContent = '';
+    errorElement.classList.remove(this._errorClass);
   }
 
   disableSubmitButton = () => {

@@ -1,9 +1,8 @@
-import { openModalWindow, imageModalWindow, popupImage, popupCaption } from './utility.js';
-
 class Card {
-  constructor( data, elementSelector ) {
+  constructor( data, handleElementClick, elementSelector ) { // Свяжите класс Card c попапом. Сделайте так, чтобы Card принимал в конструктор функцию handleCardClick
     this._title = data.title;
     this._link = data.link;
+    this._handleElementClick = handleElementClick;
 
     this._elementSelector = elementSelector;
   }
@@ -20,19 +19,16 @@ class Card {
   }
 
   _setEventListeners() {
-    this._element.querySelector('.element__image')
-      .addEventListener('click', () => this._handlePreviewPicture());
-
       this._likeButton.addEventListener('click', () => this._handleLikeIcon());
+
       this._element.querySelector('.element__delete-button')
       .addEventListener('click', () => this._handleDeleteElement());
-  }
 
-  _handlePreviewPicture() {
-    popupImage.src = this._link;
-    popupImage.alt = `Изображение ${this._title}`;
-    popupCaption.textContent = this._title;
-    openModalWindow(imageModalWindow);
+      this._element.querySelector('.element__image')
+      .addEventListener('click', () => this.handleElementClick({ // Сделайте так, чтобы Card принимал в конструктор функцию handleCardClick. Эта функция должна открывать попап с картинкой при клике на карточку
+        title: this._title,
+        link: this._link
+      }));
   }
 
   _handleLikeIcon() {
@@ -40,9 +36,8 @@ class Card {
   }
 
   _handleDeleteElement() {
-    if (this._element) {
       this._element.remove();
-      this._element = null;}
+      this._element = null;
   }
 
   getView() {
