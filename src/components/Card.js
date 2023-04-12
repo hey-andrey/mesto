@@ -1,5 +1,5 @@
 class Card {
-  constructor( data, handleElementClick, elementSelector ) { // Свяжите класс Card c попапом. Сделайте так, чтобы Card принимал в конструктор функцию handleCardClick
+  constructor( data, handleElementClick, elementSelector ) { // Свяжите класс Card c попапом. Сделайте так, чтобы Card принимал в конструктор функцию
     this._title = data.title;
     this._link = data.link;
     this._handleElementClick = handleElementClick;
