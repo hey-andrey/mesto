@@ -1,5 +1,5 @@
 class Card {
-  constructor( data, handleElementClick, elementSelector ) { // Свяжите класс Card c попапом. Сделайте так, чтобы Card принимал в конструктор функцию
+  constructor({ data, handleElementClick }, elementSelector ) { // Свяжите класс Card c попапом. Сделайте так, чтобы Card принимал в конструктор функцию
     this._title = data.title;
     this._link = data.link;
     this._handleElementClick = handleElementClick;
@@ -25,7 +25,7 @@ class Card {
       .addEventListener('click', () => this._handleDeleteElement());
 
       this._element.querySelector('.element__image')
-      .addEventListener('click', () => this.handleElementClick({ // Сделайте так, чтобы Card принимал в конструктор функцию handleCardClick. Эта функция должна открывать попап с картинкой при клике на карточку
+      .addEventListener('click', () => this._handleElementClick({ // Сделайте так, чтобы Card принимал в конструктор функцию handleCardClick. Эта функция должна открывать попап с картинкой при клике на карточку
         title: this._title,
         link: this._link
       }));
@@ -36,8 +36,9 @@ class Card {
   }
 
   _handleDeleteElement() {
+    if (this._element) {
       this._element.remove();
-      this._element = null;
+      this._element = null;}
   }
 
   getView() {
