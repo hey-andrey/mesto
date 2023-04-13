@@ -8,9 +8,9 @@ export const defaultFormConfig = {
 };
 
 export const popupConfig = {
-  editFormModalWindow: '.popup_type_edit',
-  elementFormModalWindow: '.popup_type_new-element',
-  imageModalWindow: '.popup_type_image',
+  editFormModalWindow: '.popup_type_edit', // нахожу pop-up редактирования профиля с помощью .querySelector
+  elementFormModalWindow: '.popup_type_new-element', // нахожу pop-up добавления карточки с помощью .querySelector
+  imageModalWindow: '.popup_type_image', // нахожу pop-up изображения с помощью .querySelector
 };
 
 export const profileConfig = {

@@ -51,12 +51,12 @@
           <form class="popup__form" name="edit-profile" novalidate>
 
             <label class="popup__label">
-              <input type="text" name="title" id="title" class="popup__input popup__input_type_title" placeholder="Имя" required minlength="2" maxlength="40"> <!--поле обязательное, в поле имя от 2 до 40 символов, стандартные браузерные тексты ошибок-->
+              <input type="text" name="profileTitle" id="title" class="popup__input popup__input_type_title" placeholder="Имя" required minlength="2" maxlength="40"> <!--поле обязательное, в поле имя от 2 до 40 символов, стандартные браузерные тексты ошибок-->
               <span class="popup__error" id="title-error"></span>
             </label>
 
             <label class="popup__label">
-              <input type="text" name="description" id="description" class="popup__input popup__input_type_description" placeholder="О себе" required minlength="2" maxlength="200"> <!--поле обязательное, в поле о себе от 2 до 200 символов, стандартные браузерные тексты ошибок-->
+              <input type="text" name="profileDescription" id="description" class="popup__input popup__input_type_description" placeholder="О себе" required minlength="2" maxlength="200"> <!--поле обязательное, в поле о себе от 2 до 200 символов, стандартные браузерные тексты ошибок-->
               <span class="popup__error" id="description-error"></span>
             </label>
 
@@ -74,12 +74,12 @@
           <form class="popup__form" name="new-element" novalidate>
 
             <label class="popup__label">
-              <input type="text" name="element-title" id="element-title" class="popup__input popup__input_type_element-title" placeholder="Название" required minlength="2" maxlength="30"> <!--поле обязательное, в поле название от 2 до 30 символов, стандартные браузерные тексты ошибок-->
+              <input type="text" name="title" id="element-title" class="popup__input popup__input_type_element-title" placeholder="Название" required minlength="2" maxlength="30"> <!--поле обязательное, в поле название от 2 до 30 символов, стандартные браузерные тексты ошибок-->
               <span class="popup__error" id="element-title-error"></span>
             </label>
 
             <label class="popup__label">
-              <input type="url" name="url" id="element-url" class="popup__input popup__input_type_url" placeholder="Ссылка на картинку" required> <!--поле обязательное, в поле ссылка на картинку обязательная, стандартные браузерные тексты ошибок-->
+              <input type="url" name="link" id="element-url" class="popup__input popup__input_type_url" placeholder="Ссылка на картинку" required> <!--поле обязательное, в поле ссылка на картинку обязательная, стандартные браузерные тексты ошибок-->
               <span class="popup__error" id="element-url-error"></span>
             </label>
 
@@ -92,7 +92,7 @@
       <div class="popup popup_type_image" style="background-color: rgba(0, 0, 0, .9);">
         <div class="popup__container popup__container_contain_image">
           <button type="button" class="popup__close-button"></button>
-          <img src="#" alt="Изображение" class="popup__image">
+          <img alt="" class="popup__image">
           <p class="popup__caption"></p>
         </div>
       </div>

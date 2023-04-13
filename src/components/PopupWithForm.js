@@ -11,7 +11,7 @@ class PopupWithForm extends Popup { // Создайте класс PopupWithForm
   _getInputValues() { // Содержит приватный метод _getInputValues, который собирает данные всех полей формы
     this._inputList = this._popupElement.querySelectorAll('.popup__input');
     this._formValues = {};
-    this._inputList.forEach(input => this._formValues[input.title] = input.value);
+    this._inputList.forEach(input => this._formValues[input.name] = input.value);
 
     return this._formValues;
   }

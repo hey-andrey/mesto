@@ -37,10 +37,28 @@ const initialCards = [
   }
 ];
 
-const userInfo = new UserInfo({
-  userTitleSelector: profileConfig.profileTitle,
-  userDescriptionSelector: profileConfig.profileDescription
+// Кнопки
+const openEditFormButton = document.querySelector('.profile__edit-button');
+const openElementFormButton = document.querySelector('.profile__add-button');
+// Импуты
+const titleInputValue = document.querySelector('.popup__input_type_title');
+const descriptionInputValue = document.querySelector('.popup__input_type_description');
+
+const profileInfo = new UserInfo({
+  profileTitleSelector: profileConfig.profileTitle,
+  profileDescriptionSelector: profileConfig.profileDescription
 });
+
+const imagePopup = new PopupWithImage(popupConfig.imageModalWindow);
+imagePopup.setEventListeners();
+
+const editFormValidator = new FormValidator(defaultFormConfig, popupConfig.editFormModalWindow);
+editFormValidator.enableValidation();
+editFormValidator.resetValidation();
+
+const elementFormValidator = new FormValidator(defaultFormConfig, popupConfig.elementFormModalWindow);
+elementFormValidator.enableValidation();
+elementFormValidator.resetValidation();
 
 const createElement = (data) => {
 const element = new Card({
@@ -59,53 +77,35 @@ const elementList = new Section({
 }, elementsConfig.elementsWrap
 );
 
-const imagePopup = new PopupWithImage(popupConfig.imageModalWindow);
-
-const userInfoPopup = new PopupWithForm({
-  popupSelector: popupConfig.editFormModalWindow,
-  handleFormSubmit: (data) => {
-    userInfo.setUserInfo(data)
-  }
-});
-
 const newElementPopup = new PopupWithForm({
   popupSelector: popupConfig.elementFormModalWindow,
   handleFormSubmit: (data) => {
     elementList.addItem(createElement(data));
   }
 });
-
-const editFormValidator = new FormValidator(defaultFormConfig, popupConfig.editFormModalWindow);
-const elementFormValidator = new FormValidator(defaultFormConfig, popupConfig.elementFormModalWindow);
-
-imagePopup.setEventListeners();
-userInfoPopup.setEventListeners();
 newElementPopup.setEventListeners();
+
+const profileInfoPopup = new PopupWithForm({
+  popupSelector: popupConfig.editFormModalWindow,
+  handleFormSubmit: (data) => {
+    profileInfo.setProfileInfo(data)
+  }
+});
+profileInfoPopup.setEventListeners();
 
 elementList.renderItems(initialCards);
 
-editFormValidator.enableValidation();
-elementFormValidator.enableValidation();
-
-// Кнопки
-const openEditFormButton = document.querySelector('.profile__edit-button');
-const openElementFormButton = document.querySelector('.profile__add-button');
-// Импуты
-const titleInputValue = document.querySelector('.popup__input_type_title');
-const descriptionInputValue = document.querySelector('.popup__input_type_description');
-
 // Слушатели
 openEditFormButton.addEventListener('click', () => {
-  const currentUserInfo = userInfo.getUserInfo();
-  titleInputValue.value = currentUserInfo.userTitle; // Инпут title
-  descriptionInputValue.value = currentUserInfo.userDescription; // Инпут description
+  const currentProfileInfo = profileInfo.getProfileInfo();
+  titleInputValue.value = currentProfileInfo.profileTitle; // Инпут title
+  descriptionInputValue.value = currentProfileInfo.profileDescription; // Инпут description
+  profileInfoPopup.open();
   editFormValidator.resetValidation();
-  userInfoPopup.open();
 });
 
 openElementFormButton.addEventListener('click', () => {
   newElementPopup.open();
   elementFormValidator.disableSubmitButton();
-
   elementFormValidator.resetValidation();
 });

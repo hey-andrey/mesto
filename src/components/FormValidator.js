@@ -111,7 +111,6 @@ class FormValidator {
         this._hideFieldError(elementInput) // очищаем ошибки
       });
     }
-
   }
 
 export default FormValidator;
