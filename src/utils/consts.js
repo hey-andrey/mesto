@@ -22,5 +22,3 @@ export const elementsConfig = {
   elementsWrap: '.elements__list',
   elementSelector: '#element-template'
 };
-
-export const ESC_KEYCODE = 27;

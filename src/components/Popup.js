@@ -1,5 +1,3 @@
-import { ESC_KEYCODE } from '../utils/consts.js';
-
 class Popup { // Создайте класс Popup, который отвечает за открытие и закрытие попапа
   constructor(popupSelector) { // Принимает в конструктор единственный параметр — селектор попапа
     this._popupElement = document.querySelector(popupSelector);
@@ -8,7 +6,7 @@ class Popup { // Создайте класс Popup, который отвеча�
 
   _handleEscClose(evt) { // Содержит приватный метод _handleEscClose, который содержит логику закрытия попапа клавишей Esc
     evt.preventDefault();
-    if (evt.which === ESC_KEYCODE) {
+    if (evt.key === "Escape")    {
     this.close();
     }
   }

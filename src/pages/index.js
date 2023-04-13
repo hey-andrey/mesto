@@ -54,11 +54,9 @@ imagePopup.setEventListeners();
 
 const editFormValidator = new FormValidator(defaultFormConfig, popupConfig.editFormModalWindow);
 editFormValidator.enableValidation();
-editFormValidator.resetValidation();
 
 const elementFormValidator = new FormValidator(defaultFormConfig, popupConfig.elementFormModalWindow);
 elementFormValidator.enableValidation();
-elementFormValidator.resetValidation();
 
 const createElement = (data) => {
 const element = new Card({
