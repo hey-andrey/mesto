@@ -5,12 +5,11 @@ class PopupWithImage extends Popup { // Создайте класс PopupWithIma
     super(popupElement);
 
     this._popupСaption = this._popupElement.querySelector('.popup__caption');
-    this._popupImage = this._popupElement.querySelector('.popup__image');
   }
 
   open({ link, title }) {
     this._popupСaption.textContent = title;
-    const image =  this._popupImage;
+    const image =  this._popupElement.querySelector('.popup__image');
 
     image.src = link;
     image.alt = `Изображение ${title}`;
