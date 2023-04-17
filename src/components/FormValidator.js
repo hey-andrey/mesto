@@ -6,7 +6,7 @@ class FormValidator {
       this._inputErrorClass = inputErrorClass;
       this._errorClass = errorClass;
 
-      this._element = document.querySelector(popupSelector);
+      this._element = document.querySelector(`.${popupSelector}`);
     }
 
   // Функция, которая проверяет валидность поля

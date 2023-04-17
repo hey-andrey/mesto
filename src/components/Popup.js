@@ -1,12 +1,12 @@
 class Popup { // Создайте класс Popup, который отвечает за открытие и закрытие попапа
   constructor(popupSelector) { // Принимает в конструктор единственный параметр — селектор попапа
-    this._popupElement = document.querySelector(popupSelector);
+    this._popupElement = document.querySelector(`.${popupSelector}`);
     this._handleEscClose = this._handleEscClose.bind(this);
   }
 
   _handleEscClose(evt) { // Содержит приватный метод _handleEscClose, который содержит логику закрытия попапа клавишей Esc
     evt.preventDefault();
-    if (evt.key === "Escape")    {
+    if (evt.key === "Escape") {
     this.close();
     }
   }
